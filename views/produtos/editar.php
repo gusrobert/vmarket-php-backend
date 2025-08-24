@@ -71,23 +71,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			<form action="" method="POST">
 				<input type="hidden" name="id" value="<?= htmlspecialchars($produto['id']) ?>">
 				<div class="mb-3">
-					<label for="nome" class="form-label">Nome</label>
+					<label for="nome" class="form-label">Nome <span class="text-danger">*</span></label>
 					<input value="<?= htmlspecialchars($produto['nome']) ?>" type="text" class="form-control" id="nome" name="nome" required>
 				</div>
 				<div class="mb-3">
 					<label for="descricao" class="form-label">Descrição</label>
-					<textarea class="form-control" id="descricao" name="descricao" rows="3" required><?= htmlspecialchars($produto['descricao']) ?></textarea>
+					<textarea class="form-control" id="descricao" name="descricao" rows="3"><?= htmlspecialchars($produto['descricao']) ?></textarea>
 				</div>
 				<div class="mb-3">
-					<label for="quantidade" class="form-label">Quantidade</label>
+					<label for="quantidade" class="form-label">Quantidade <span class="text-danger">*</span></label>
 					<input value="<?= htmlspecialchars($produto['quantidade']) ?>" type="number" class="form-control" id="quantidade" name="quantidade" required>
 				</div>
 				<div class="mb-3">
-					<label for="preco" class="form-label">Preço</label>
+					<label for="preco" class="form-label">Preço <span class="text-danger">*</span></label>
 					<input value="<?= htmlspecialchars($produto['preco']) ?>" type="number" class="form-control" id="preco" name="preco" step="0.01" required>
 				</div>
 				<div class="mb-3">
-					<label for="fornecedores" class="form-label">Fornecedores</label>
+					<label for="fornecedores" class="form-label">Fornecedores <span class="text-danger">*</span></label>
 					<select class="form-select" id="fornecedores" name="fornecedores_id[]" multiple required>
 						<?php foreach ($fornecedores as $fornecedor): ?>
 							<option value="<?= htmlspecialchars($fornecedor['id']) ?>" <?= in_array($fornecedor['id'], $produto['fornecedores_id']) ? 'selected' : '' ?>><?= htmlspecialchars($fornecedor['nome']) ?></option>

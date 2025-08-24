@@ -63,6 +63,7 @@ class ProdutosController
             $data->id,
             $data->nome,
             $data->descricao,
+            $data->quantidade,
             $data->preco
         );
     }

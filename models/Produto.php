@@ -67,18 +67,21 @@ class Produto
 		int $id,
 		string $nome,
 		?string $descricao,
+		int $quantidade,
 		float $preco
 	): bool {
 		$query = "
 			UPDATE produtos 
 			SET nome = :nome, 
 				descricao = :descricao, 
+				quantidade = :quantidade,
 				preco = :preco
 			WHERE id = :id";
 		$stmt = $this->conn->prepare($query);
 		$stmt->bindParam(':id', $id);
 		$stmt->bindParam(':nome', $nome);
 		$stmt->bindParam(':descricao', $descricao);
+		$stmt->bindParam(':quantidade', $quantidade);
 		$stmt->bindParam(':preco', $preco);
 		return $stmt->execute();
 	}
