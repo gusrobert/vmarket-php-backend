@@ -30,8 +30,24 @@
 ## Dependências
 Todas as dependências externas (Bootstrap, Choices.js, SweetAlert2) são importadas via CDN, não sendo necessário instalar nada além do PHP.
 
+
+## Banco de Dados
+
+1. Crie um banco de dados MySQL chamado `vmarket` (ou altere o nome no arquivo `config.php`).
+2. Execute os scripts SQL localizados na pasta `/database` para criar as tabelas e popular dados de teste:
+   - `schema.sql`: Criação das tabelas necessárias
+   - `seeds.sql`: Dados de exemplo para testes
+3. As credenciais padrão de acesso ao banco estão em `config.php`:
+   ```php
+   $host = 'localhost';
+   $dbname = 'vmarket';
+   $username = 'root';
+   $password = 'admin';
+   ```
+   Altere conforme necessário para o seu ambiente.
+
 ## Como rodar o projeto
-1. Configure o banco de dados MySQL usando os scripts em `/database`.
+1. Siga as instruções acima para configurar o banco de dados.
 2. Ajuste as credenciais de conexão no arquivo de configuração (`config.php`).
 3. Suba o servidor PHP embutido:
    ```sh
