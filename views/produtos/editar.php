@@ -1,5 +1,11 @@
 <?php 
 
+require_once __DIR__ . '/../../config.php';
+global $conn;
+if (!$conn) {
+	die('Erro: conexão com o banco de dados não foi estabelecida.');
+}
+
 require_once __DIR__ . '/../../controllers/ProdutosController.php';
 require_once __DIR__ . '/../../controllers/FornecedoresController.php';
 require_once __DIR__ . '/../../dto/ProdutoUpdateDTO.php';
@@ -8,11 +14,11 @@ $id = $_GET['id'] ?? null;
 
 $produto = null;
 if (!empty($id) && is_numeric($id) && $id > 0) {
-	$controller = new ProdutosController();
+	$controller = new ProdutosController($conn);
 	$produto = $controller->buscarProdutoPorId($id);
 }
 
-$fornecedoresController = new FornecedoresController();
+$fornecedoresController = new FornecedoresController($conn);
 $fornecedores = $fornecedoresController->listarFornecedores();
 
 $sucesso = false;

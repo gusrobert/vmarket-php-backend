@@ -1,13 +1,11 @@
 <?php
 
-require_once __DIR__ . '/../config.php';
 require_once __DIR__ . '/../models/Fornecedor.php';
 
 class FornecedoresController {
 	private Fornecedor $fornecedor;
 
-    public function __construct() {
-		global $conn;
+    public function __construct($conn) {
         $this->fornecedor = new Fornecedor($conn);
     }
 

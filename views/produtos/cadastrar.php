@@ -1,13 +1,19 @@
 <?php 
 
+require_once __DIR__ . '/../../config.php';
+global $conn;
+if (!$conn) {
+	die('Erro: conexão com o banco de dados não foi estabelecida.');
+}
+
 require_once __DIR__ . '/../../controllers/ProdutosController.php';
 require_once __DIR__ . '/../../controllers/FornecedoresController.php';
-require_once __DIR__ . '/../../dto/ProdutoCreateDTO.php';
+require_once __DIR__ . '/../../DTO/ProdutoCreateDTO.php';
 
-$fornecedoresController = new FornecedoresController();
+$fornecedoresController = new FornecedoresController($conn);
 $fornecedores = $fornecedoresController->listarFornecedores();
 
-$controller = new ProdutosController();
+$controller = new ProdutosController($conn);
 
 $sucesso = false;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

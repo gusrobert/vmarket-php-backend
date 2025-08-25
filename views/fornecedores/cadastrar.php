@@ -1,9 +1,15 @@
 <?php 
 
-require_once __DIR__ . '/../../controllers/FornecedoresController.php';
-require_once __DIR__ . '/../../dto/FornecedorCreateDTO.php';
+require_once __DIR__ . '/../../config.php';
+global $conn;
+if (!$conn) {
+	die('Erro: conexão com o banco de dados não foi estabelecida.');
+}
 
-$controller = new FornecedoresController();
+require_once __DIR__ . '/../../controllers/FornecedoresController.php';
+require_once __DIR__ . '/../../DTO/FornecedorCreateDTO.php';
+
+$controller = new FornecedoresController($conn);
 
 $sucesso = false;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

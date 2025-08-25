@@ -1,22 +1,29 @@
 <?php
-require_once __DIR__ . '/../../controllers/produtosController.php';
 
+require_once __DIR__ . '/../../config.php';
+global $conn;
+if (!$conn) {
+	die('Erro: conexão com o banco de dados não foi estabelecida.');
+}
+
+require_once __DIR__ . '/../../controllers/ProdutosController.php';
 require_once __DIR__ . '/../../controllers/FornecedoresController.php';
-$controller = new ProdutosController();
-$fornecedoresController = new FornecedoresController();
+
+$produtosController = new ProdutosController($conn);
+$fornecedoresController = new FornecedoresController($conn);
 $fornecedores = $fornecedoresController->listarFornecedores();
 
 $nomeBusca = $_GET['busca_nome'] ?? '';
 $fornecedorBusca = $_GET['busca_fornecedor'] ?? '';
 
 $fornecedorBusca = $fornecedorBusca !== '' ? (int)$fornecedorBusca : 0;
-$produtos = $controller->buscarProdutoPorNomeOuFornecedor($nomeBusca, $fornecedorBusca);
+$produtos = $produtosController->buscarProdutoPorNomeOuFornecedor($nomeBusca, $fornecedorBusca);
 
 $deleteSuccess = false;
 $deleteAllSuccess = false;
 if (isset($_GET['delete'])) {
 	$id = (int)$_GET['delete'];
-	if ($controller->deletarProduto($id)) {
+	if ($produtosController->deletarProduto($id)) {
 		$deleteSuccess = true;
 	}
 }
@@ -27,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$ids = array_map('intval', $_POST['produtos']);
 		$ok = true;
 		foreach ($ids as $id) {
-			if (!$controller->deletarProduto($id)) {
+			if (!$produtosController->deletarProduto($id)) {
 				$ok = false;
 			}
 		}
@@ -38,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	if (isset($_POST['excluir_todos'])) {
 		$ok = true;
 		foreach ($produtos as $f) {
-			if (!$controller->deletarProduto($f['id'])) {
+			if (!$produtosController->deletarProduto($f['id'])) {
 				$ok = false;
 			}
 		}

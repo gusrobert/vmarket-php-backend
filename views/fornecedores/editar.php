@@ -1,11 +1,17 @@
 <?php 
 
+require_once __DIR__ . '/../../config.php';
+global $conn;
+if (!$conn) {
+	die('Erro: conexão com o banco de dados não foi estabelecida.');
+}
+
 require_once __DIR__ . '/../../controllers/FornecedoresController.php';
 
 $fornecedor = null;
 if (!empty($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] > 0) {
 	$id = (int)$_GET['id'];
-	$controller = new FornecedoresController();
+	$controller = new FornecedoresController($conn);
 	$fornecedor = $controller->buscarPorId($id);
 }
 
@@ -17,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$email = trim($_POST['email']);
 	$telefone = trim($_POST['telefone']);
 
-	$controller = new FornecedoresController();
+	$controller = new FornecedoresController($conn);
 	$sucesso = $controller->atualizarFornecedor($id, $nome, $email, $telefone);
 }
 

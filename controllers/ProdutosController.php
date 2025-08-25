@@ -1,8 +1,7 @@
 <?php
 
-require_once __DIR__ . '/../dto/ProdutoCreateDTO.php';
-require_once __DIR__ . '/../dto/ProdutoUpdateDTO.php';
-require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/../DTO/ProdutoCreateDTO.php';
+require_once __DIR__ . '/../DTO/ProdutoUpdateDTO.php';
 require_once __DIR__ . '/../models/Produto.php';
 require_once __DIR__ . '/../models/ProdutosFornecedores.php';
 
@@ -10,9 +9,8 @@ class ProdutosController
 {
 	private Produto $produto;
 
-    public function __construct() 
+    public function __construct($conn) 
     {
-		global $conn;
         $this->produto = new Produto($conn);
     }
 

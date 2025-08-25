@@ -1,6 +1,6 @@
 <?php
 
-$host = 'localhost';
+$host = '127.0.0.1';
 $dbname = 'vmarket';
 $username = 'root';
 $password = 'admin';
@@ -18,4 +18,5 @@ try {
     $conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 } catch (PDOException $e) {
     echo "Erro ao conectar ao banco de dados: " . $e->getMessage();
+    exit;
 }

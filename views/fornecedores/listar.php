@@ -1,10 +1,14 @@
 <?php 
 
+require_once __DIR__ . '/../../config.php';
+global $conn;
+if (!$conn) {
+	die('Erro: conexão com o banco de dados não foi estabelecida.');
+}
+
 require_once __DIR__ . '/../../controllers/FornecedoresController.php';
 
-
-
-$controller = new FornecedoresController();
+$controller = new FornecedoresController($conn);
 $nomeBusca = $_GET['busca_nome'] ?? '';
 $fornecedores = $controller->buscarPorNome($nomeBusca);
 
