@@ -3,7 +3,7 @@
 require_once __DIR__ . '/../models/Fornecedor.php';
 
 class FornecedoresController {
-	private Fornecedor $fornecedor;
+    private Fornecedor $fornecedor;
 
     public function __construct($conn) {
         $this->fornecedor = new Fornecedor($conn);

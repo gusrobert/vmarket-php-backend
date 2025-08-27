@@ -7,7 +7,7 @@ require_once __DIR__ . '/../models/ProdutosFornecedores.php';
 
 class ProdutosController 
 {
-	private Produto $produto;
+    private Produto $produto;
 
     public function __construct($conn) 
     {
